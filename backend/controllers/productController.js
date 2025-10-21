@@ -22,9 +22,14 @@ const getProdAllProducts=async (req,res)=>{
 };
 
 const getProductDetails=async (req,res)=>{
+    productId=req.params.id
     try{
-        const {id}=req.params
-        
+        const product=await Products.findById(productId)
+        res.status(200).json(product)
+    }catch (err) {
+    res.status(500).json("Error fetching product details"); 
+  }   
+}; 
 module.exports={
   addProduct,
   getProdAllProducts
